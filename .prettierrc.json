@@ -1,0 +1,30 @@
+{
+  "semi": false,
+  "singleQuote": false,
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "printWidth": 80,
+  "plugins": [
+    "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "tailwindStylesheet": "./src/styles/index.css",
+  "tailwindFunctions": ["cn", "cva"],
+  "importOrder": [
+    "^(react/(.*)$)|^(react$)",
+    "^react-i18next$",
+    "^react-dom",
+    "^react-router-dom$",
+    "",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^@/.*\\.(css)$",
+    "^@/.*\\.(jpg|png|svg|gif|webp)$",
+    "^@/(.*)$",
+    "",
+    "^\\./.*\\.(css)$",
+    "^\\./.*\\.(jpg|png|svg|gif|webp)$",
+    "^[./].*$"
+  ],
+  "importOrderParserPlugins": ["typescript", "jsx"]
+}

@@ -1,0 +1,28 @@
+/* 工具样式类 */
+
+@layer utilities {
+  /* === 布局 === */
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+
+  /* === hover 效果 === */
+
+  .glass-effect {
+    @apply border border-border bg-background/80 shadow-xl backdrop-blur-xl;
+  }
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

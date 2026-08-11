@@ -1,0 +1,11 @@
+# 无需格式化
+
+dist
+dist-ssr
+node_modules
+.vite
+.rolldown
+*.local
+.oxc_cache
+pnpm-lock.yaml
+*.svg
