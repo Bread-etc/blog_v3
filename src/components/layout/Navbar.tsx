@@ -6,7 +6,7 @@ import { HugeiconsIcon } from "@hugeicons/react"
 
 import imgSrc from "@/assets/images/avatar.png"
 import ThemeToggle from "@/components/layout/ThemeToggle"
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 
 interface NavbarProps {
@@ -36,13 +36,21 @@ function DefaultNavbarContent() {
 
   return (
     <div className="flex items-center gap-4">
-      <Link to="/" className="shrink-0">
+      <Link
+        to="/"
+        aria-label={t("nav.home")}
+        className="shrink-0 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
         <Avatar className="size-8">
-          <AvatarImage src={imgSrc} />
+          <AvatarImage src={imgSrc} alt={t("nav.avatarAlt")} />
+          <AvatarFallback>B</AvatarFallback>
         </Avatar>
       </Link>
 
-      <nav className="flex-center flex-1 gap-4 sm:gap-6">
+      <nav
+        aria-label={t("nav.primaryNavigation")}
+        className="flex-center flex-1 gap-4 sm:gap-6"
+      >
         <NavLinkItem to="/archive" label={t("nav.archive")} />
         <NavLinkItem to="/links" label={t("nav.links")} />
         <NavLinkItem to="/about" label={t("nav.about")} />
@@ -56,17 +64,35 @@ function DefaultNavbarContent() {
 }
 
 function SubpageNavbarContent({ pageTitle }: { pageTitle: string }) {
+  const { t } = useTranslation()
   const navigate = useNavigate()
+
+  function handleBack() {
+    const historyIndex = window.history.state?.idx
+
+    if (typeof historyIndex === "number" && historyIndex > 0) {
+      navigate(-1)
+    } else {
+      navigate("/", { replace: true })
+    }
+  }
 
   return (
     <div className="flex items-center gap-3">
       <Button
+        type="button"
         variant="ghost"
         size="icon"
-        onClick={() => navigate("/")}
+        aria-label={t("nav.back")}
+        title={t("nav.back")}
+        onClick={handleBack}
         className="shrink-0"
       >
-        <HugeiconsIcon icon={Undo03Icon} className="size-4.5" />
+        <HugeiconsIcon
+          icon={Undo03Icon}
+          className="size-4.5"
+          aria-hidden="true"
+        />
       </Button>
 
       <div className="min-w-0 flex-1 text-center">
