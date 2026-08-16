@@ -12,13 +12,17 @@ type RouteHandle = {
   hideFooter?: boolean
 }
 
+const DEFAULT_NAVBAR_PATHS = new Set(["/", "/archive", "/links", "/about"])
+
 export default function RootLayout() {
   const { t } = useTranslation()
   const location = useLocation()
   const matches = useMatches()
 
-  const isHome = location.pathname === "/"
-  const variant = isHome ? "default" : "subpage"
+  const normalizedPathname = location.pathname.replace(/\/+$/, "") || "/"
+  const variant = DEFAULT_NAVBAR_PATHS.has(normalizedPathname)
+    ? "default"
+    : "subpage"
 
   const currentMatch = matches.at(-1)
   const handle = (currentMatch?.handle ?? {}) as RouteHandle
