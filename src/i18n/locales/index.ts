@@ -2,11 +2,13 @@
 import authEn from "./en/auth"
 import commonEn from "./en/common"
 import errorEn from "./en/error"
+import linksEn from "./en/links"
 import navEn from "./en/nav"
 // 中文
 import authZh from "./zh/auth"
 import commonZh from "./zh/common"
 import errorZh from "./zh/error"
+import linksZh from "./zh/links"
 import navZh from "./zh/nav"
 
 export const resources = {
@@ -16,6 +18,7 @@ export const resources = {
       nav: navEn,
       error: errorEn,
       auth: authEn,
+      links: linksEn,
     },
   },
   "zh-CN": {
@@ -24,6 +27,7 @@ export const resources = {
       nav: navZh,
       error: errorZh,
       auth: authZh,
+      links: linksZh,
     },
   },
 } as const

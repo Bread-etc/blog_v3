@@ -7,6 +7,7 @@ import Home from "@/pages/home"
 import ErrorElement from "@/router/ErrorElement"
 
 // 懒加载配置
+const LinksPage = lazy(() => import("@/pages/links"))
 const LoginPage = lazy(() => import("@/pages/login"))
 const Overview = lazy(() => import("@/pages/admin/overview"))
 const Content = lazy(() => import("@/pages/admin/content"))
@@ -25,6 +26,13 @@ const router = createBrowserRouter([
         element: <Home />,
         handle: {
           title: "nav.home",
+        },
+      },
+      {
+        path: "links",
+        element: <LinksPage />,
+        handle: {
+          title: "nav.links",
         },
       },
       {
