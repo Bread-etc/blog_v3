@@ -1,10 +1,10 @@
-// 英文
+import aboutEn from "./en/about"
 import authEn from "./en/auth"
 import commonEn from "./en/common"
 import errorEn from "./en/error"
 import linksEn from "./en/links"
 import navEn from "./en/nav"
-// 中文
+import aboutZh from "./zh/about"
 import authZh from "./zh/auth"
 import commonZh from "./zh/common"
 import errorZh from "./zh/error"
@@ -19,6 +19,7 @@ export const resources = {
       error: errorEn,
       auth: authEn,
       links: linksEn,
+      about: aboutEn,
     },
   },
   "zh-CN": {
@@ -28,6 +29,7 @@ export const resources = {
       error: errorZh,
       auth: authZh,
       links: linksZh,
+      about: aboutZh,
     },
   },
 } as const

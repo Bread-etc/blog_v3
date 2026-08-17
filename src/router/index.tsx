@@ -8,6 +8,7 @@ import ErrorElement from "@/router/ErrorElement"
 
 // 懒加载配置
 const LinksPage = lazy(() => import("@/pages/links"))
+const AboutPage = lazy(() => import("@/pages/about"))
 const LoginPage = lazy(() => import("@/pages/login"))
 const Overview = lazy(() => import("@/pages/admin/overview"))
 const Content = lazy(() => import("@/pages/admin/content"))
@@ -33,6 +34,13 @@ const router = createBrowserRouter([
         element: <LinksPage />,
         handle: {
           title: "nav.links",
+        },
+      },
+      {
+        path: "about",
+        element: <AboutPage />,
+        handle: {
+          title: "nav.about",
         },
       },
       {
