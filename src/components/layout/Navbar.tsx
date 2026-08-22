@@ -12,11 +12,13 @@ import { Button } from "@/components/ui/button"
 interface NavbarProps {
   variant?: "default" | "subpage"
   pageTitle: string
+  backTo?: string
 }
 
 export default function Navbar({
   variant = "default",
   pageTitle,
+  backTo,
 }: NavbarProps) {
   return (
     <div className="mx-auto w-full max-w-2xl">
@@ -24,7 +26,7 @@ export default function Navbar({
         {variant === "default" ? (
           <DefaultNavbarContent />
         ) : (
-          <SubpageNavbarContent pageTitle={pageTitle} />
+          <SubpageNavbarContent pageTitle={pageTitle} backTo={backTo} />
         )}
       </div>
     </div>
@@ -63,11 +65,22 @@ function DefaultNavbarContent() {
   )
 }
 
-function SubpageNavbarContent({ pageTitle }: { pageTitle: string }) {
+function SubpageNavbarContent({
+  pageTitle,
+  backTo,
+}: {
+  pageTitle: string
+  backTo?: string
+}) {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
   function handleBack() {
+    if (backTo) {
+      navigate(backTo, { replace: true })
+      return
+    }
+
     const historyIndex = window.history.state?.idx
 
     if (typeof historyIndex === "number" && historyIndex > 0) {

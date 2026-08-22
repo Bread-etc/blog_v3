@@ -79,7 +79,7 @@ export default function Home() {
       )}
 
       {contactEmail ? (
-        <section className="mt-24 rounded-lg border border-border bg-card px-6 py-12 text-center sm:px-10 sm:py-14">
+        <section className="mt-24 mb-12 rounded-lg border border-border bg-card px-6 py-12 text-center sm:px-10 sm:py-14">
           <div className="mx-auto max-w-lg">
             <h2 className="text-xl font-semibold">{t("home.contact.title")}</h2>
 

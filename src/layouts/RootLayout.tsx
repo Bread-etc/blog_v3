@@ -10,6 +10,7 @@ import type { I18nKey } from "@/i18n/types"
 type RouteHandle = {
   title?: I18nKey
   hideFooter?: boolean
+  backTo?: string
 }
 
 const DEFAULT_NAVBAR_PATHS = new Set(["/", "/archive", "/links", "/about"])
@@ -29,12 +30,13 @@ export default function RootLayout() {
 
   const pageTitle = handle.title ? t(handle.title) : ""
   const hideFooter = handle.hideFooter ?? false
+  const backTo = handle.backTo
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/20">
       <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col sm:px-6 lg:px-8">
         <header className="sticky top-0 z-40 p-4">
-          <Navbar variant={variant} pageTitle={pageTitle} />
+          <Navbar variant={variant} pageTitle={pageTitle} backTo={backTo} />
         </header>
         <main className="flex-1 px-4 pb-4">
           <Suspense fallback={<AppLoading variant="public" />}>

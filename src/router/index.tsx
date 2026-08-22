@@ -49,6 +49,7 @@ const router = createBrowserRouter([
         handle: {
           title: "nav.login",
           hideFooter: true,
+          backTo: "/",
         },
       },
     ],

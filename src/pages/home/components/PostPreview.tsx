@@ -88,7 +88,7 @@ export default function PostPreview({
           {summary ? (
             <p
               className={cn(
-                "text-muted-foreground",
+                "wrap-anywhere text-muted-foreground",
                 featured
                   ? "mt-4 line-clamp-4 text-base leading-7"
                   : "mt-2 line-clamp-3 text-sm leading-6"
