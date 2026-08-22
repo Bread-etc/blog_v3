@@ -14,7 +14,7 @@
   /* === hover 效果 === */
 
   .glass-effect {
-    @apply border border-border bg-background/80 shadow-xl backdrop-blur-xl;
+    @apply border border-border bg-background/30 shadow-xl backdrop-blur-xl;
   }
 }
 
