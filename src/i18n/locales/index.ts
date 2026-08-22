@@ -2,12 +2,14 @@ import aboutEn from "./en/about"
 import authEn from "./en/auth"
 import commonEn from "./en/common"
 import errorEn from "./en/error"
+import homeEn from "./en/home"
 import linksEn from "./en/links"
 import navEn from "./en/nav"
 import aboutZh from "./zh/about"
 import authZh from "./zh/auth"
 import commonZh from "./zh/common"
 import errorZh from "./zh/error"
+import homeZh from "./zh/home"
 import linksZh from "./zh/links"
 import navZh from "./zh/nav"
 
@@ -18,6 +20,7 @@ export const resources = {
       nav: navEn,
       error: errorEn,
       auth: authEn,
+      home: homeEn,
       links: linksEn,
       about: aboutEn,
     },
@@ -28,6 +31,7 @@ export const resources = {
       nav: navZh,
       error: errorZh,
       auth: authZh,
+      home: homeZh,
       links: linksZh,
       about: aboutZh,
     },
