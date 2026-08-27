@@ -201,8 +201,6 @@ export default function PostEditorDialog({
   const resetSaveMutation = saveMutation.reset
 
   useEffect(() => {
-    if (!open) return
-
     initializedItemId.current = null
     resetSaveMutation()
     setFormValues(EMPTY_FORM)
@@ -237,11 +235,17 @@ export default function PostEditorDialog({
 
   const categories = categoriesQuery.data ?? []
   const tags = tagsQuery.data ?? []
+  const isInitializingForm =
+    open &&
+    isEditing &&
+    Boolean(detailQuery.data) &&
+    initializedItemId.current !== itemId
 
   const isLoading =
     (isEditing && detailQuery.isPending) ||
     categoriesQuery.isPending ||
-    tagsQuery.isPending
+    tagsQuery.isPending ||
+    isInitializingForm
 
   const hasLoadError =
     (isEditing && detailQuery.isError && !detailQuery.data) ||
