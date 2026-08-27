@@ -34,11 +34,12 @@ export default function RootLayout() {
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/20">
-      <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col sm:px-6 lg:px-8">
-        <header className="sticky top-0 z-40 p-4">
+      <div className="mx-auto flex min-h-screen w-full max-w-6xl min-w-0 flex-col sm:px-6 lg:px-8">
+        <header className="fixed inset-x-0 top-0 z-40 p-4 sm:px-10 lg:px-12">
           <Navbar variant={variant} pageTitle={pageTitle} backTo={backTo} />
         </header>
-        <main className="flex-1 px-4 pb-4">
+        <div aria-hidden="true" className="h-21.5 shrink-0" />
+        <main className="min-w-0 flex-1 px-4 pb-4">
           <Suspense fallback={<AppLoading variant="public" />}>
             <Outlet />
           </Suspense>
