@@ -4,6 +4,8 @@
 @import "@fontsource-variable/geist";
 @import "./utilities.css";
 
+@plugin "@tailwindcss/typography";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
