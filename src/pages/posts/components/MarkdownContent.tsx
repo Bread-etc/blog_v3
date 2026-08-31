@@ -91,6 +91,29 @@ function MarkdownRenderer({ content, className }: MarkdownContentProps) {
     [highlighter]
   )
 
+  useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (!hash) {
+      return
+    }
+
+    let targetId: string
+    try {
+      targetId = decodeURIComponent(hash)
+    } catch {
+      return
+    }
+
+    const animationFrame = window.requestAnimationFrame(() => {
+      document.getElementById(targetId)?.scrollIntoView({
+        behavior: "auto",
+        block: "start",
+      })
+    })
+
+    return () => window.cancelAnimationFrame(animationFrame)
+  }, [content])
+
   return (
     <article
       className={cn(
