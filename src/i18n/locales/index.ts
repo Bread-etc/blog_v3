@@ -1,4 +1,5 @@
 import aboutEn from "./en/about"
+import archiveEn from "./en/archive"
 import authEn from "./en/auth"
 import commonEn from "./en/common"
 import errorEn from "./en/error"
@@ -7,6 +8,7 @@ import linksEn from "./en/links"
 import navEn from "./en/nav"
 import postEn from "./en/post"
 import aboutZh from "./zh/about"
+import archiveZh from "./zh/archive"
 import authZh from "./zh/auth"
 import commonZh from "./zh/common"
 import errorZh from "./zh/error"
@@ -23,6 +25,7 @@ export const resources = {
       error: errorEn,
       auth: authEn,
       home: homeEn,
+      archive: archiveEn,
       links: linksEn,
       about: aboutEn,
       post: postEn,
@@ -35,6 +38,7 @@ export const resources = {
       error: errorZh,
       auth: authZh,
       home: homeZh,
+      archive: archiveZh,
       links: linksZh,
       about: aboutZh,
       post: postZh,
