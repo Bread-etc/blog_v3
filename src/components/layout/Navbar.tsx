@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 
 import { Undo03Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
@@ -8,6 +8,7 @@ import imgSrc from "@/assets/images/avatar.png"
 import ThemeToggle from "@/components/layout/ThemeToggle"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 interface NavbarProps {
   variant?: "default" | "subpage"
@@ -123,11 +124,17 @@ function SubpageNavbarContent({
 
 function NavLinkItem({ to, label }: { to: string; label: string }) {
   return (
-    <Link
+    <NavLink
       to={to}
-      className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+      end
+      className={({ isActive }) =>
+        cn(
+          "text-sm font-medium transition-colors hover:text-primary",
+          isActive ? "text-primary" : "text-muted-foreground"
+        )
+      }
     >
       {label}
-    </Link>
+    </NavLink>
   )
 }
