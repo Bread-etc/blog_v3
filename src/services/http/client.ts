@@ -27,9 +27,8 @@ export class HttpError extends Error {
   }
 }
 
-const URL = import.meta.env.MODE === "development" ? "/api" : env.apiBaseUrl
 const instance: AxiosInstance = axios.create({
-  baseURL: URL,
+  baseURL: env.apiBaseUrl,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",

@@ -11,14 +11,14 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "./src"),
+        "@": path.resolve(import.meta.dirname, "./src"),
       },
     },
     server: {
       port: 8080,
       proxy: {
         "/api": {
-          target: env.VITE_API_BASE_URL,
+          target: env.API_PROXY_TARGET,
           changeOrigin: true,
         },
       },
