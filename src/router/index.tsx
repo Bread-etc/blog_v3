@@ -1,5 +1,5 @@
 import { lazy } from "react"
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter, Navigate } from "react-router-dom"
 
 import AdminLayout from "@/layouts/AdminLayout"
 import RootLayout from "@/layouts/RootLayout"
@@ -75,6 +75,10 @@ const router = createBrowserRouter([
     element: <AdminLayout />,
     errorElement: <ErrorElement />,
     children: [
+      {
+        index: true,
+        element: <Navigate to="overview" replace />,
+      },
       {
         path: "overview",
         element: <Overview />,
