@@ -4,8 +4,8 @@ import { ArrowRight01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { useQuery } from "@tanstack/react-query"
 
+import { useSiteConfig } from "@/hooks/useSiteConfig"
 import { getPostList } from "@/services/api/post"
-import { getSiteConfig } from "@/services/api/site"
 import type { GetPostListRequest } from "@/types/post"
 
 import { PostsSkeleton, PostsState } from "./components/HomePostStates"
@@ -25,10 +25,7 @@ export default function Home() {
     queryKey: ["posts", "home", HOME_POST_PARAMS],
     queryFn: () => getPostList(HOME_POST_PARAMS),
   })
-  const configQuery = useQuery({
-    queryKey: ["config"],
-    queryFn: getSiteConfig,
-  })
+  const configQuery = useSiteConfig()
 
   // Variables
   const posts = postsQuery.data?.list ?? []

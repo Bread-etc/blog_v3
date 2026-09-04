@@ -10,7 +10,7 @@ import {
   ViewOffIcon,
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
@@ -22,13 +22,13 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { SITE_CONFIG_QUERY_KEY, useSiteConfig } from "@/hooks/useSiteConfig"
 import { encryptWithPublicKey } from "@/lib/crypto"
 import { changePassword, getPublicKey } from "@/services/api/auth"
-import { getSiteConfig, updateSiteConfig } from "@/services/api/site"
+import { updateSiteConfig } from "@/services/api/site"
 import { HttpError } from "@/services/http/client"
 import type { SiteConfig, UpdateSiteConfigRequest } from "@/types/site"
 
-const SITE_CONFIG_QUERY_KEY = ["config"] as const
 const MIN_PASSWORD_LENGTH = 8
 
 interface PasswordFormValues {
@@ -157,10 +157,7 @@ function SettingsState({
 function SiteConfigurationSection() {
   const { t } = useTranslation()
 
-  const configQuery = useQuery({
-    queryKey: SITE_CONFIG_QUERY_KEY,
-    queryFn: getSiteConfig,
-  })
+  const configQuery = useSiteConfig()
 
   return (
     <SettingsSection

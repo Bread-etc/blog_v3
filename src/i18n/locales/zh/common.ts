@@ -7,6 +7,12 @@ export default {
   delete: "删除",
   edit: "编辑",
   search: "搜索",
+  footer: {
+    madeBy: "由 <author>{{author}}</author> 构建",
+    github: "GitHub",
+    email: "电子邮件",
+    reddit: "Reddit",
+  },
   pagination: {
     previous: "上一页",
     next: "下一页",

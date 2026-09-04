@@ -10,8 +10,8 @@ import { useQuery } from "@tanstack/react-query"
 
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
+import { useSiteConfig } from "@/hooks/useSiteConfig"
 import { getLinks } from "@/services/api/link"
-import { getSiteConfig } from "@/services/api/site"
 
 function getInitials(name: string) {
   const words = name.trim().split(/\s+/).filter(Boolean)
@@ -42,10 +42,7 @@ export default function Links() {
     queryKey: ["links"],
     queryFn: getLinks,
   })
-  const configQuery = useQuery({
-    queryKey: ["config"],
-    queryFn: getSiteConfig,
-  })
+  const configQuery = useSiteConfig()
 
   // Variables
   const links = linksQuery.data ?? []

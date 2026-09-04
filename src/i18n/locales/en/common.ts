@@ -7,6 +7,12 @@ export default {
   delete: "Delete",
   edit: "Edit",
   search: "Search",
+  footer: {
+    madeBy: "Made by <author>{{author}}</author>",
+    github: "GitHub",
+    email: "Email",
+    reddit: "Reddit",
+  },
   pagination: {
     previous: "Previous page",
     next: "Next page",
