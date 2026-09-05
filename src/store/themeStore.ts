@@ -36,7 +36,8 @@ export const useThemeStore = create<ThemeState>()(
   )
 )
 
-const updateDocumentClass = (theme: Theme) => {
+// persist 会在 Store 创建时同步恢复状态，因此使用可提升的函数声明。
+function updateDocumentClass(theme: Theme) {
   if (typeof window === "undefined") return
   // TODO: 迁移SSR需要考虑无window的问题
   const root = window.document.documentElement
