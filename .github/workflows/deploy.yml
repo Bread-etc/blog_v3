@@ -1,0 +1,91 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches: ["main"]
+    # 当 docs/CHANGELOG.md 文件发生变更时，触发 CI/CD
+    paths:
+      - "docs/CHANGELOG.md"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: blog-frontend-production
+  cancel-in-progress: false
+
+jobs:
+  verify-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+      VITE_SITE_NAME: ${{ vars.VITE_SITE_NAME }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.27.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate build variables
+        run: |
+          : "${VITE_API_BASE_URL:?Repository variable VITE_API_BASE_URL is required}"
+          : "${VITE_SITE_NAME:?Repository variable VITE_SITE_NAME is required}"
+
+      - name: Test
+        run: pnpm test
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Upload staging files
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          source: "dist"
+          target: "/tmp/blog-frontend-${{ github.sha }}"
+
+      - name: Publish frontend
+        uses: appleboy/ssh-action@v1
+        env:
+          RELEASE_SHA: ${{ github.sha }}
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          envs: RELEASE_SHA
+          script: |
+            set -eu
+
+            source_dir="/tmp/blog-frontend-${RELEASE_SHA}/dist"
+            target_dir="/opt/blog_go/frontend/dist"
+
+            test -f "${source_dir}/index.html"
+            mkdir -p "${target_dir}"
+
+            rsync -a --delete-delay --delay-updates \
+              "${source_dir}/" "${target_dir}/"
+
+            rm -rf "/tmp/blog-frontend-${RELEASE_SHA}"
+
+            curl -fsS --max-time 15 https://hastur23.top/ >/dev/null
+            curl -fsS --max-time 15 https://hastur23.top/archive >/dev/null
+            curl -fsS --max-time 15 https://hastur23.top/api/health >/dev/null
