@@ -55,5 +55,6 @@ export default {
     description:
       "An unknown error occurred. Please refresh or try again later.",
   },
+  home: "Back to home",
   back: "Back to previous page",
 }

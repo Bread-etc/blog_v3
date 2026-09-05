@@ -47,5 +47,6 @@ export default {
     title: "出了点意外 😵",
     description: "发生了一个未知错误，你可以刷新页面或稍后再试",
   },
+  home: "返回首页",
   back: "返回上一页",
 }

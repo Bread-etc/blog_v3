@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next"
 import {
   isRouteErrorResponse,
+  Link,
   useNavigate,
   useRouteError,
 } from "react-router-dom"
@@ -46,6 +47,8 @@ export default function ErrorElement() {
   const content =
     ERROR_STATUS_KEYS[status as keyof typeof ERROR_STATUS_KEYS] ??
     DEFAULT_ERROR_CONTENT
+  const historyIndex = window.history.state?.idx
+  const canGoBack = typeof historyIndex === "number" && historyIndex > 0
 
   return (
     <div className="flex-center min-h-[60vh] px-4 py-12">
@@ -60,7 +63,22 @@ export default function ErrorElement() {
           </p>
         </div>
 
-        <Button onClick={() => navigate(-1)}>{t("error.back")}</Button>
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          {canGoBack ? (
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => navigate(-1)}
+            >
+              {t("error.back")}
+            </Button>
+          ) : null}
+          <Button asChild>
+            <Link to="/" replace>
+              {t("error.home")}
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   )
