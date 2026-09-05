@@ -11,6 +11,7 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react"
 import { useMutation } from "@tanstack/react-query"
 
+import { ScrollRestorationReady } from "@/components/layout/PublicScrollRestoration"
 import { Button } from "@/components/ui/button"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
@@ -83,6 +84,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex-center px-4 py-12">
+      <ScrollRestorationReady />
       <div className="w-full max-w-md rounded-lg border-2 border-border bg-card p-6 shadow-2xl backdrop-blur-sm sm:p-10 sm:px-12">
         <div className="mb-6 text-center">
           <h1 className="text-xl font-semibold text-foreground sm:text-2xl">

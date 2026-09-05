@@ -4,6 +4,7 @@ import { ArrowRight01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { useQuery } from "@tanstack/react-query"
 
+import { ScrollRestorationReady } from "@/components/layout/PublicScrollRestoration"
 import { useSiteConfig } from "@/hooks/useSiteConfig"
 import { getPostList } from "@/services/api/post"
 import type { GetPostListRequest } from "@/types/post"
@@ -34,6 +35,7 @@ export default function Home() {
 
   return (
     <div className="mx-auto w-full">
+      <ScrollRestorationReady ready={!postsQuery.isPending} />
       <header>
         <span className="inline-flex rounded-sm bg-primary/10 px-2 py-1 text-sm font-medium text-primary">
           {t("home.hero.eyebrow")}

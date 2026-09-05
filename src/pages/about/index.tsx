@@ -10,6 +10,7 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react"
 
 import avatarSrc from "@/assets/images/avatar.png"
+import { ScrollRestorationReady } from "@/components/layout/PublicScrollRestoration"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const TECH_GROUPS = [
@@ -63,6 +64,7 @@ export default function About() {
 
   return (
     <div className="mx-auto w-full">
+      <ScrollRestorationReady />
       <header className="sm:grid-cols-[auto_minmax(0, 1fr)] grid items-center gap-6">
         <Avatar className="size-24 sm:size-28">
           <AvatarImage src={avatarSrc} alt={t("about.hero.avatarAlt")} />

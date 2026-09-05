@@ -5,6 +5,7 @@ import { Outlet, useLocation, useMatches } from "react-router-dom"
 import AppLoading from "@/components/layout/fallback/AppLoading"
 import Footer from "@/components/layout/Footer"
 import Navbar from "@/components/layout/Navbar"
+import PublicScrollRestoration from "@/components/layout/PublicScrollRestoration"
 import type { I18nKey } from "@/i18n/types"
 
 type RouteHandle = {
@@ -40,9 +41,11 @@ export default function RootLayout() {
         </header>
         <div aria-hidden="true" className="h-21.5 shrink-0" />
         <main className="min-w-0 flex-1 px-4 pb-4">
-          <Suspense fallback={<AppLoading variant="public" />}>
-            <Outlet />
-          </Suspense>
+          <PublicScrollRestoration>
+            <Suspense fallback={<AppLoading variant="public" />}>
+              <Outlet />
+            </Suspense>
+          </PublicScrollRestoration>
         </main>
         {!hideFooter && (
           <footer className="border-t border-border">

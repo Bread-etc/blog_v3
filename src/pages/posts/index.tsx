@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom"
 import { useMutation, useQuery } from "@tanstack/react-query"
 
 import defaultCover from "@/assets/images/default_cover.webp"
+import { ScrollRestorationReady } from "@/components/layout/PublicScrollRestoration"
 import { cn } from "@/lib/utils"
 import { getPostDetail, incrementPostView } from "@/services/api/post"
 import { HttpError } from "@/services/http/client"
@@ -42,17 +43,6 @@ export default function PostDetailPage() {
   const headings = useMemo(() => extractMarkdownHeadings(content), [content])
 
   useEffect(() => {
-    if (window.location.hash) {
-      return
-    }
-
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    })
-  }, [slug])
-
-  useEffect(() => {
     if (!postId || viewedPostId.current === postId) {
       return
     }
@@ -62,7 +52,12 @@ export default function PostDetailPage() {
   }, [incrementView, postId])
 
   if (!slug || isPostNotFound(postQuery.error)) {
-    return <PostDetailState variant="notFound" />
+    return (
+      <>
+        <ScrollRestorationReady />
+        <PostDetailState variant="notFound" />
+      </>
+    )
   }
 
   if (postQuery.isPending) {
@@ -71,10 +66,13 @@ export default function PostDetailPage() {
 
   if (!post) {
     return (
-      <PostDetailState
-        variant="error"
-        onRetry={() => void postQuery.refetch()}
-      />
+      <>
+        <ScrollRestorationReady />
+        <PostDetailState
+          variant="error"
+          onRetry={() => void postQuery.refetch()}
+        />
+      </>
     )
   }
 
@@ -133,7 +131,9 @@ export default function PostDetailPage() {
             />
           </div>
 
-          <MarkdownContent content={content} className="mt-8" />
+          <MarkdownContent content={content} className="mt-8">
+            <ScrollRestorationReady />
+          </MarkdownContent>
         </div>
       </div>
     </div>

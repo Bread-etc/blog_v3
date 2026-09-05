@@ -9,6 +9,7 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react"
 import { useInfiniteQuery } from "@tanstack/react-query"
 
+import { ScrollRestorationReady } from "@/components/layout/PublicScrollRestoration"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { getPostList } from "@/services/api/post"
@@ -46,6 +47,8 @@ export default function Archive() {
   // 网络请求
   const postsQuery = useInfiniteQuery({
     queryKey: ["posts", "archive", ARCHIVE_QUERY_PARAMS],
+    // 阅读长文章后返回时，仍保留已经加载的归档分页
+    gcTime: Infinity,
     initialPageParam: 1,
     queryFn: ({ pageParam }) =>
       getPostList({
@@ -70,6 +73,7 @@ export default function Archive() {
 
   return (
     <div className="mx-auto w-full">
+      <ScrollRestorationReady ready={!postsQuery.isPending} />
       <header className="max-w-2xl">
         <h1 id="archive-heading" className="text-2xl font-semibold">
           {t("archive.title")}

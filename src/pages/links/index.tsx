@@ -8,6 +8,7 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react"
 import { useQuery } from "@tanstack/react-query"
 
+import { ScrollRestorationReady } from "@/components/layout/PublicScrollRestoration"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useSiteConfig } from "@/hooks/useSiteConfig"
@@ -50,6 +51,7 @@ export default function Links() {
 
   return (
     <div className="mx-auto w-full">
+      <ScrollRestorationReady ready={!linksQuery.isPending} />
       <header className="max-w-2xl">
         <h1 className="text-2xl font-semibold">{t("links.title")}</h1>
         <p className="text-base leading-7 text-muted-foreground">
