@@ -18,6 +18,11 @@ import type { GetPostListRequest, GetPostListResponse } from "@/types/post"
 import { ArchiveSkeleton, ArchiveState } from "./components/ArchiveStates"
 
 const ARCHIVE_PAGE_SIZE = 20
+const ARCHIVE_TIME_ZONE = "Asia/Shanghai"
+const ARCHIVE_YEAR_FORMATTER = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  timeZone: ARCHIVE_TIME_ZONE,
+})
 
 const ARCHIVE_QUERY_PARAMS = {
   pageSize: ARCHIVE_PAGE_SIZE,
@@ -263,34 +268,25 @@ function groupPostsByYear(posts: ArchivePost[]): ArchiveYearGroup[] {
   }))
 }
 
-// 获取文章年份（正则匹配）
+// 获取文章年份并格式化
 function getPostYear(value: string) {
-  const matchedYear = /^(\d{4})-/.exec(value)?.[1]
-
-  if (matchedYear) {
-    return matchedYear
-  }
-
   const date = new Date(value)
-
   if (Number.isNaN(date.getTime())) {
     return value
   }
-
-  return String(date.getFullYear())
+  return ARCHIVE_YEAR_FORMATTER.format(date)
 }
 
 // 本地格式化归档日期
 function formatArchiveDate(value: string, locale: string) {
   const date = new Date(value)
-
   if (Number.isNaN(date.getTime())) {
     return value
   }
-
   return new Intl.DateTimeFormat(locale, {
     month: "short",
     day: "numeric",
+    timeZone: ARCHIVE_TIME_ZONE,
   }).format(date)
 }
 
